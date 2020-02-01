@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { LandingComponent } from '../layouts/pages/landing/landing.component';
 
 const childrens = {
   guest: [
@@ -13,22 +12,23 @@ const childrens = {
       path: '',
       loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
     }
+  ],
+  user:  [
+    {
+      path: '',
+      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+    }
   ]
 }
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full',
   }, {
     path: '',
     component: AdminLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-      }
-    ]
+    children: childrens.user
   }, {
     path: '',
     component: AuthLayoutComponent,
